@@ -4,14 +4,6 @@ import { Card, CardImg, CardText, CardBody,
 
 class DishDetail extends Component{
 
-    constructor(props) {
-        super(props);
-
-        this.state = { 
-            selectedDish: this.props.selectedDish 
-        };
-    }
-
     /*First card showing first part of dish information...*/ 
     renderDish(dish){
 
@@ -28,7 +20,6 @@ class DishDetail extends Component{
         }
         else
         {
-            //console.log("NO MUESTRA NADA");
             return( 
                 <div></div>
             );
@@ -36,16 +27,23 @@ class DishDetail extends Component{
     }
 
     /*Second card showing second part of dish information...*/
+    renderComments(){
+
+        return (
+            <div>
+               {this.props.comments}
+            </div>
+        );
+    }
 
     render(){
+        //console.log(this.props.comments);
+        const comentarios = this.props.comments.map( a => console.log(a) );
+
         return(
-            <div className="container">
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                        {this.renderDish(this.state.selectedDish)}
-                    </div>
-                </div>
-            </div>
+            <div className="col-12 col-md-5 m-1">
+                {this.renderDish(this.props.dishes)}
+            </div>       
         );
     }
 
