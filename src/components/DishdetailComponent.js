@@ -4,6 +4,13 @@ import { Card, CardImg, CardText, CardBody,
 
 class DishDetail extends Component{
 
+    constructor(props){
+        super(props);
+        this.state = {
+            coment: this.props.comments 
+        }; 
+    }
+
     /*First card showing first part of dish information...*/ 
     renderDish(dish){
 
@@ -27,26 +34,45 @@ class DishDetail extends Component{
     }
 
     /*Second card showing second part of dish information...*/
-    renderComments(){
+    renderComments(comentarios){
 
         return (
             <div>
-               {this.props.comments}
+                {comentarios}
             </div>
         );
     }
 
     render(){
+        
         //console.log(this.props.comments);
-        const comentarios = this.props.comments.map( a => console.log(a) );
+        const comentarios = this.state.coment.map( (variable) => 
+            {
+            return (
+                <div key={variable.id}>
+                    <p>{variable.comment}</p>
+                    <p><span>{"-- "}</span>{variable.author}</p>
+                </div>
+            );    
+        });
 
         return(
             <div className="col-12 col-md-5 m-1">
-                {this.renderDish(this.props.dishes)}
-            </div>       
+                <div>
+                    {this.renderDish(this.props.dishes)}
+                </div>
+                <div>
+                    <h4>Comments</h4>             
+                    {this.renderComments(comentarios)}
+                </div>           
+            </div>      
         );
     }
 
+}
+
+DishDetail.defaultProps = {
+    coment: []
 }
 
 export default DishDetail;

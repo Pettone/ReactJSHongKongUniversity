@@ -11,12 +11,26 @@ class Menu extends Component {
 
         this.state = {
             selectedDish: null,
-            selectedDishComments: null
         };
     }
 
     onDishSelect(dish) {
-        this.setState({ selectedDish: dish, selectedDishComments: dish.comments });
+        this.setState({ selectedDish: dish });
+    }
+
+    renderDish(dish){
+        if ( dish != null )
+        {
+            return(               
+                <DishDetail dishes={dish} comments={dish.comments}/>
+            );
+        }
+        else
+        {
+            return(
+                <div></div>
+            );
+        }
     }
 
     render() {
@@ -40,9 +54,7 @@ class Menu extends Component {
                     {menu}
                 </div>
                 <div className="row"> 
-                    <DishDetail 
-                      dishes={this.state.selectedDish} 
-                      comments={this.state.selectedDishComments}/>
+                    {this.renderDish(this.state.selectedDish)}
                 </div>
             </div>
         );
