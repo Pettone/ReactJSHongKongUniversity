@@ -37,10 +37,18 @@ class DishDetail extends Component{
     renderComments(comentarios){
 
         return (
-            <div>
+            <div className="col-12 col-md-5 m-1">
+                <h4>Comments</h4>
                 {comentarios}
             </div>
         );
+    }
+
+    dating(param){
+        var dateToDate = new Date(param);
+        var month = dateToDate.toLocaleString('default', { month: 'short' });
+        var year = dateToDate.toLocaleString('default', { year: 'numeric' });
+        return `${month}, ${year}`;
     }
 
     render(){
@@ -49,22 +57,24 @@ class DishDetail extends Component{
         const comentarios = this.state.coment.map( (variable) => 
             {
             return (
-                <div key={variable.id}>
+                <div key={variable.id} className="list-unstyled">
                     <p>{variable.comment}</p>
-                    <p><span>{"-- "}</span>{variable.author}</p>
+                    <p>
+                        <span>{"-- "}</span>
+                        {variable.author}
+                        <span>{", "}</span>
+                        <span>{this.dating(variable.date)}</span>
+                    </p>
                 </div>
             );    
         });
 
         return(
-            <div className="col-12 col-md-5 m-1">
-                <div>
+            <div className="row">
+                <div className="col-12 col-md-5 m-1">
                     {this.renderDish(this.props.dishes)}
-                </div>
-                <div>
-                    <h4>Comments</h4>             
-                    {this.renderComments(comentarios)}
-                </div>           
+                </div>             
+                    {this.renderComments(comentarios)}           
             </div>      
         );
     }
