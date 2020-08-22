@@ -4,6 +4,7 @@ import { Card, CardImg, CardText, CardBody,
   ModalBody, Row, Label, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors, Field } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 
 const required = (val) => val && val.length;
 const minLength = (len) => (val) => (val) && (val.length >= len);
@@ -174,6 +175,25 @@ class DishDetail extends Component{
                 </div>
             );    
         });
+
+        if (this.props.isLoading){
+            return(
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (this.props.errMess){
+            return(
+            <div className="container">
+                    <div className="row">
+                        <h4>{this.props.errMess}</h4>
+                    </div>
+                </div>
+            );    
+        }
 
         return(
             <div className="container">
