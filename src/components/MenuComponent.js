@@ -26,7 +26,7 @@ import { Loading } from './LoadingComponent';
       );
       });
 
-      if (this.props.isLoading){
+      if (props.isLoading){
         return(
             <div className="container">
                 <div className="row">
@@ -35,7 +35,7 @@ import { Loading } from './LoadingComponent';
             </div>
         );
       }
-      else if (this.props.errMess){
+      else if (props.errMess){
         return(
         <div className="container">
                 <div className="row">
