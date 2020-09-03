@@ -32,7 +32,7 @@ class CommentForm extends Component{
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.addComment(this.props.dishId,values.rating,values.author,values.comment);
+        this.props.postComment(this.props.dishId,values.rating,values.author,values.comment);
     }
 
     render(){
@@ -141,13 +141,13 @@ class DishDetail extends Component{
     }
 
     /*Second card showing second part of dish information...*/
-    renderComments(comentarios,addComment,dishId){
+    renderComments(comentarios,postComment,dishId){
 
         return (
             <div className="col-12 col-md-5 m-1">
                 <h4>Comments</h4>
                 {comentarios}
-                <CommentForm dishId={dishId} addComment={addComment}/>
+                <CommentForm dishId={dishId} postComment={postComment}/>
             </div>
         );
     }
@@ -214,7 +214,7 @@ class DishDetail extends Component{
                 <div className="col-12 col-md-5 m-1">
                     {this.renderDish(this.props.dish)}
                 </div>             
-                    {this.renderComments(comentarios,this.props.addComment,this.props.dish.id)}
+                    {this.renderComments(comentarios,this.props.postComment,this.props.dish.id)}
                 </div>           
             </div>      
         );
