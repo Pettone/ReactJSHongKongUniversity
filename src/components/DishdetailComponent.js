@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors, Field } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const required = (val) => val && val.length;
 const minLength = (len) => (val) => (val) && (val.length >= len);
@@ -123,6 +124,10 @@ class DishDetail extends Component{
 
         if ( dish != null ){
             return(
+                <FadeTransform in 
+                    transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
                 <Card>
                     <CardImg top src={ baseUrl + dish.image} alt={dish.name} />
                     <CardBody>
@@ -130,6 +135,7 @@ class DishDetail extends Component{
                       <CardText>{dish.description}</CardText>
                     </CardBody>
                 </Card>
+                </FadeTransform>
             );
         }
         else
@@ -144,11 +150,13 @@ class DishDetail extends Component{
     renderComments(comentarios,postComment,dishId){
 
         return (
+            <Fade in>
             <div className="col-12 col-md-5 m-1">
                 <h4>Comments</h4>
                 {comentarios}
                 <CommentForm dishId={dishId} postComment={postComment}/>
             </div>
+            </Fade>
         );
     }
 
@@ -213,8 +221,10 @@ class DishDetail extends Component{
                 <div className="row">
                 <div className="col-12 col-md-5 m-1">
                     {this.renderDish(this.props.dish)}
-                </div>             
+                </div>  
+                    <Stagger in>           
                     {this.renderComments(comentarios,this.props.postComment,this.props.dish.id)}
+                    </Stagger>
                 </div>           
             </div>      
         );
