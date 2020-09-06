@@ -3,6 +3,9 @@ import { Breadcrumb, BreadcrumbItem, Button, Label, Col,
     Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, Form, Errors, actions } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -54,6 +57,7 @@ class Contact extends Component {
     handleSubmit(values) {
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
+        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message);
         this.props.resetFeedbackForm();
     }
 
